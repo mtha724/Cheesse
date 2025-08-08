@@ -1,4 +1,5 @@
 import cheesePixel from './assets/pixel-cheese.png'
+import GamePage from './pages/GamePage'
 import './App.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         The finest selection of cheeses from around the world. <br />
         Integrated into a chess game. <br />
       </p>
+      <GamePage />
     </>
   )
 }

@@ -1,0 +1,5 @@
+.top-control-bar {
+  justify-content: center;
+  display: flex;
+  gap: 12px;
+}
