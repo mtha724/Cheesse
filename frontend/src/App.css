@@ -1,20 +1,5 @@
-.delicious-cheese {
-  width: 100px;
-  height: 100px;
-}
-
 .delicious-cheese-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-/* Description for <p>. Make text centered */
-.description {
-  text-align: center;
-}
-
-h1 {
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
