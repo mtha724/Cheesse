@@ -6,7 +6,7 @@ export default function GamePage() {
 
   return (
     <div>
-      <TopControlBar />
+   
       <Board />
     </div>
   );

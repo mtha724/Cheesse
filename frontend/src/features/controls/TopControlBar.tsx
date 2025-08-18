@@ -8,7 +8,6 @@ export default function TopControlBar() {
         <button>Undo</button>
         <button>Redo</button>
       </div>
-      <p>Note: buttons don't work</p>
     </>
   );
 }

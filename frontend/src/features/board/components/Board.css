@@ -1,20 +1,49 @@
 /* Basic, throwaway styling for a bare chessboard UI */
 
-.board-wrapper {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  padding: 12px;
-  box-sizing: border-box;
+.wrapper {
+    display: grid;
+    place-items: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  
 }
+
+@media (min-aspect-ratio: 16/9) {
+    .board-wrapper {
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        background-image: url("../../../assets/board.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 32.5vw;
+        height: auto;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .board-wrapper {
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        background-image: url("../../../assets/board.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 58vh;
+        width: 58vh;
+    }
+}
+
+
 
 .board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   aspect-ratio: 1 / 1;
-  width: min(90vmin, 720px);
+  width: 100%;
   border: 2px solid #222;
-  background: #222; /* thin separators if gaps appear */
+  /*background: #222; /* thin separators if gaps appear */
 }
 
 .square {
@@ -23,7 +52,7 @@
   height: 100%;
 }
 
-.square.light { background: #f0d9b5; }
+/*.square.light { background: #f0d9b5; }
 .square.dark  { background: #b58863; }
 
 /* Rank label (left edge) */
