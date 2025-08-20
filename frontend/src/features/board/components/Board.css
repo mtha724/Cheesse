@@ -1,14 +1,46 @@
-/* Basic, throwaway styling for a bare chessboard UI */
+/* Base styles for the chessboard */
+#chessboard {
+  background: #669d49;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 800px;
+  height: 800px;
+  border: 2px solid #222;
+}
 
+/* Styles for the individual tiles */
+#chessboard .tile {
+  width: 100%;
+  height: 100%;
+}
+
+/* Styles for the dark tiles */
+#chessboard .dark-tile {
+  background: #855b39;
+
+}
+
+/* Styles for the light tiles */
+#chessboard .light-tile {
+  background: #f0d9b5;
+}
+
+/* Wrapper for centering the board */
 .wrapper {
     display: grid;
     place-items: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-  
 }
 
+/* Container for the chessboard and labels */
+.board-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Media queries for responsive design */
 @media (min-aspect-ratio: 16/9) {
     .board-wrapper {
         display: grid;
@@ -35,46 +67,30 @@
     }
 }
 
-
-
-.board {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  border: 2px solid #222;
-  /*background: #222; /* thin separators if gaps appear */
+.rank-labels,
+.file-labels {
+  position: absolute;
+  font-size: clamp(10px, 1.5vmin, 14px);
+  font-weight: 600;
+  color: rgba(0,0,0,0.7);
+  pointer-events: none;
 }
 
-.square {
-  position: relative;
-  width: 100%;
+/* Rank labels (1–8) on the left */
+.rank-labels {
+  top: 0;
+  left: -20px; /* adjust spacing */
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
   height: 100%;
 }
 
-/*.square.light { background: #f0d9b5; }
-.square.dark  { background: #b58863; }
-
-/* Rank label (left edge) */
-.square.first-col::before {
-  content: attr(data-rank);
-  position: absolute;
-  top: 4px;
-  left: 6px;
-  font-size: clamp(10px, 1.8vmin, 12px);
-  color: rgba(0,0,0,0.7);
-  font-weight: 600;
-  pointer-events: none;
-}
-
-/* File label (bottom edge) */
-.square.last-row::after {
-  content: attr(data-file);
-  position: absolute;
-  right: 6px;
-  bottom: 4px;
-  font-size: clamp(10px, 1.8vmin, 12px);
-  color: rgba(0,0,0,0.7);
-  font-weight: 600;
-  pointer-events: none;
+/* File labels (a–h) on the bottom */
+.file-labels {
+  bottom: -20px; /* adjust spacing */
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
+  text-align: center;
 }
