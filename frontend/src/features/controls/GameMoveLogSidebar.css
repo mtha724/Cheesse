@@ -1,0 +1,36 @@
+.game-log-wrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 50vh;
+}
+
+.game-move-log-sidebar {
+    background-image: url("../../assets/menuBoard.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70%;
+    width: 70%;
+    filter: drop-shadow(-5px 5px 10px rgb(64, 36, 1));
+}
+
+.move-log-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70%;
+    width: 80%;
+    background-color: #e2c489;
+}
+
+.move-log-lbl {
+
+    padding-top: 5%;
+}
+

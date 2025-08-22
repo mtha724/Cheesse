@@ -1,0 +1,69 @@
+.game-options-wrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 50vh;
+}
+
+.game-options-sidebar {
+    background-image: url("../../assets/menuBoard.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70%;
+    width: 70%;
+    filter: drop-shadow(5px 5px 10px rgb(64, 36, 1));
+}
+
+.button-col {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 10%;
+    padding-bottom: 20%;
+}
+
+button {
+    width: 60%;
+    height: fit-content;
+    padding: 5%;
+    font-size: 2vw;
+    font-weight: bold;
+    font-family: 'Agency FB';
+    color: #e2c489;
+    background-color: #a48351;
+    border-color: #a48351;
+
+}
+
+h1 {
+    font-family: 'Agency FB';
+    font-size: 3vw;
+    color: #e2c489;
+    text-wrap: wrap;
+    text-align: center;
+    padding-top: 10%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    button {
+  
+        font-size: 3vh;
+     
+    }
+
+    h1 {
+        font-family: 'Agency FB';
+        font-size: 5vh;
+
+    }
+}
+
