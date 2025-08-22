@@ -67,3 +67,19 @@ h1 {
     }
 }
 
+@media (max-aspect-ratio: 16/9) {
+    .game-options-wrapper {
+        height: 50vw;
+        width: 25vw;
+    }
+
+    .button-col {
+        gap: 5%;
+        padding-bottom: 10%;
+    }
+
+    h1 {
+        padding-top: 1vh;
+    }
+}
+

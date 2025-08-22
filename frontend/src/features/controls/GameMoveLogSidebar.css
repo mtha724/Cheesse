@@ -34,3 +34,17 @@
     padding-top: 5%;
 }
 
+@media (min-aspect-ratio: 16/9) {
+    h1 {
+        font-family: 'Agency FB';
+        font-size: 5vh;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .game-log-wrapper {
+        height: 50vw;
+        width: 25vw;
+    }
+
+}
