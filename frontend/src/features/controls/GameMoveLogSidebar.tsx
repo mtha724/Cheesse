@@ -1,13 +1,16 @@
-import './GameMoveLogSidebar.css'
+import './GameMoveLogSidebar.css';
+import MoveList from '../history/MoveList';
+import { useMoveLog } from '../history/moveLogStore';
 
 export default function GameMoveLogSidebar() {
-    return (
-     <div className="game-log-wrapper">
+  const { moves } = useMoveLog();
+
+  return (
+    <div className="game-log-wrapper">
       <div className="game-move-log-sidebar">
         <h1 className="move-log-lbl">Move Log</h1>
         <div className="move-log-wrapper">
-          {/*added move log here*/}
-          <p>Move log element when we make it</p>
+          <MoveList moves={moves} />
         </div>
       </div>
     </div>
