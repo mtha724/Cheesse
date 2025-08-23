@@ -1,7 +1,15 @@
 // TODO implement jump blocking for rooks, bishops, queens
 
 // This class handles the rules of chess and ensures pieces are moved according to the game's rules.
-export default class Referee {
+export default class Referee {  
+  
+  private board: (string | undefined)[][] = [];
+  private prevX = 0;
+  private prevY = 0;
+  private newX = 0;
+  private newY = 0;
+  private destPiece?: string;
+
   /**
   * Validates a move for a given piece.
   *
@@ -22,35 +30,43 @@ export default class Referee {
     destPiece?: string
   ): boolean {
 
+    // Set up the board state
+    this.board = board;
+    this.prevX = prevX;
+    this.prevY = prevY;
+    this.newX = newX;
+    this.newY = newY;
+    this.destPiece = destPiece;
+
     // Calculate the difference in position
     const dx = newX - prevX;
     const dy = newY - prevY;
 
     // Check for blocking pieces
     if (destPiece && this.isOwnPiece(piece, destPiece)) {
-      console.warn(`Cannot capture own piece: ${destPiece}`);
+      console.warn(`Invalid move: cannot capture own piece: ${destPiece}`);
       return false;
     }
 
     // Validate the move based on the piece type
     switch (piece) {
       case "pawn_white":
-        return this.validatePawn(board, prevX, prevY, newX, newY, destPiece, true);
+        return this.validatePawn(true);
 
       case "pawn_black":
-        return this.validatePawn(board, prevX, prevY, newX, newY, destPiece, false);
+        return this.validatePawn(false);
 
       case "rook_white":
       case "rook_black":
-        return this.validateRook(board, prevX, prevY, newX, newY);
+        return this.validateRook();
 
       case "bishop_white":
       case "bishop_black":
-        return this.validateBishop(board, prevX, prevY, newX, newY);
+        return this.validateBishop();
 
       case "queen_white":
       case "queen_black":
-        return this.validateQueen(board, prevX, prevY, newX, newY);
+        return this.validateQueen();
 
       case "king_white":
       case "king_black":
@@ -80,33 +96,62 @@ export default class Referee {
   }
 
   /**
+   * Determines the step direction between two positions.
+   *
+   * @param prev - The previous position.
+   * @param next - The next position.
+   * @returns The step direction (-1, 0, 1).
+   */
+  private getStep(prev: number, next: number): number {
+    if (prev === next) return 0;
+    return next > prev ? 1 : -1;
+  }
+
+  /**
+   * Checks if the path is clear for a piece to move.
+   * 
+   * @returns Whether the path is clear.
+   */
+  private isPathClear(): boolean {
+    const stepX = this.getStep(this.prevX, this.newX);
+    const stepY = this.getStep(this.prevY, this.newY);
+
+    let x = this.prevX + stepX;
+    let y = this.prevY + stepY;
+
+    // Check for obstacles in the path
+    while (x !== this.newX || y !== this.newY) {
+      if (this.board[y][x]) {
+        console.warn(`Invalid move: path blocked at ${x}, ${y}`);
+        return false;
+      }
+      x += stepX;
+      y += stepY;
+    }
+    return true;
+  }
+
+  /**
    * Validates a pawn move.
    *
-   * @param fx - The starting x-coordinate of the pawn.
-   * @param fy - The starting y-coordinate of the pawn.
-   * @param tx - The target x-coordinate for the pawn.
-   * @param ty - The target y-coordinate for the pawn.
-   * @param captured - The piece being captured, if any.
    * @param isWhite - Whether the pawn is white or black.
    * @returns Whether the move is valid.
    */
-  private validatePawn(
-    board: (string | undefined)[][],
-    prevX: number, prevY: number, newX: number, newY: number, captured?: string, isWhite = true
-  ): boolean {
+  private validatePawn(isWhite = true): boolean {
+    // Determine the direction of movement based on the pawn's color
     const dir = isWhite ? 1 : -1;
     const startRow = isWhite ? 1 : 6;
 
-    // Single move
-    if (prevX === newX && newY - prevY === dir && !captured) return true;
+    // Single move logic
+    if (this.prevX === this.newX && this.newY - this.prevY === dir && !this.destPiece) return true;
 
-    // Double move from starting row
-    if (prevX === newX && prevY === startRow && newY - prevY === 2 * dir) {
-      if (!captured) {
+    // Double move logic from starting row
+    if (this.prevX === this.newX && this.prevY === startRow && this.newY - this.prevY === 2 * dir) {
+      if (!this.destPiece) {
         // Check the intermediate square for a blockage
-        const intermediateY = prevY + dir;
-        if (board[intermediateY][prevX]) {
-          console.warn(`Invalid double move: path blocked at ${prevX}, ${intermediateY}`);
+        const intermediateY = this.prevY + dir;
+        if (this.board[intermediateY][this.prevX]) {
+          console.warn(`Invalid move: path blocked at ${this.prevX}, ${intermediateY}`);
           return false; // path blocked
         }
         return true;
@@ -114,7 +159,7 @@ export default class Referee {
     }
 
     // Capture diagonally
-    if (Math.abs(newX - prevX) === 1 && newY - prevY === dir && captured) return true;
+    if (Math.abs(this.newX - this.prevX) === 1 && this.newY - this.prevY === dir && this.destPiece) return true;
 
     return false;
   }
@@ -122,44 +167,12 @@ export default class Referee {
   /**
    * Validates a bishop move.
    *
-   * @param board - The current state of the board.
-   * @param prevX - The starting x-coordinate of the bishop.
-   * @param prevY - The starting y-coordinate of the bishop.
-   * @param newX - The target x-coordinate for the bishop.
-   * @param newY - The target y-coordinate for the bishop.
    * @returns Whether the move is valid.
    */
-  private validateBishop(
-    board: (string | undefined)[][],
-    prevX: number, prevY: number,
-    newX: number, newY: number
-  ) {
+  private validateBishop() {
     // Check for valid diagonal movement
-    if (Math.abs(newX - prevX) !== Math.abs(newY - prevY)) {
-      console.warn(`Invalid bishop move from ${prevX}, ${prevY} to ${newX}, ${newY}`);
-      return false;
-    }
-
-    // Create step variables for iteration
-    const stepX = newX > prevX ? 1 : -1;
-    const stepY = newY > prevY ? 1 : -1;
-
-    let x = prevX + stepX;
-    let y = prevY + stepY;
-
-    // Check along the diagonal
-    while (x !== newX && y !== newY) {
-      if (board[y][x]) {
-        console.warn(`Path blocked by piece at ${x}, ${y}`);
-        return false; // there is a piece blocking the path
-      }
-      // Increment the coordinates
-      x += stepX;
-      y += stepY;
-    }
-
-    // If no pieces are blocking the path, the move is valid
-    return true;
+    if (Math.abs(this.newX - this.prevX) !== Math.abs(this.newY - this.prevY)) return false;
+    return this.isPathClear();
   }
 
   /**
@@ -181,54 +194,23 @@ export default class Referee {
   /**
    * Validates a rook move.
    *
-   * @param board - The current state of the board.
-   * @param prevX - The starting x-coordinate of the rook.
-   * @param prevY - The starting y-coordinate of the rook.
-   * @param newX - The target x-coordinate for the rook.
-   * @param newY - The target y-coordinate for the rook.
    * @returns Whether the move is valid.
    */
-  private validateRook(board: (string | undefined)[][], prevX: number, prevY: number, newX: number, newY: number) {
+  private validateRook() {
     // Check for valid horizontal or vertical movement
-    if (newX - prevX != 0 && newY - prevY != 0) {
-      console.warn(`Invalid rook move from ${prevX}, ${prevY} to ${newX}, ${newY}`);
-      return false; // rook can only move in straight lines
-    }
-
-    // Create step variables for iteration
-    const stepX = prevX === newX ? 0 : newX > prevX ? 1 : -1;
-    const stepY = prevY === newY ? 0 : newY > prevY ? 1 : -1;
-
-    let x = prevX + stepX;
-    let y = prevY + stepY;
-
-    // Check for obstacles in the path
-    while (x !== newX || y !== newY) {
-      if (board[y][x]) {
-        console.warn(`Path blocked by piece at ${x}, ${y}`);
-        return false; // there is a piece blocking the path
-      }
-      x += stepX;
-      y += stepY;
-    }
-
-    return true;
+    if (this.prevX !== this.newX && this.prevY !== this.newY) return false;
+    return this.isPathClear();
   }
 
   /**
    * Validates a queen move.
    * Uses both rook and bishop movement rules.
    *
-   * @param board - The current state of the board.
-   * @param prevX - The starting x-coordinate of the queen.
-   * @param prevY - The starting y-coordinate of the queen.
-   * @param newX - The target x-coordinate for the queen.
-   * @param newY - The target y-coordinate for the queen.
    * @returns Whether the move is valid.
    */
-  private validateQueen(board: (string | undefined)[][], prevX: number, prevY: number, newX: number, newY: number) {
+  private validateQueen() {
     // Queens move like both rooks and bishops
-    return this.validateRook(board, prevX, prevY, newX, newY) || this.validateBishop(board, prevX, prevY, newX, newY);
+    return this.validateRook() || this.validateBishop();
   }
 
   /**
