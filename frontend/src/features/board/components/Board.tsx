@@ -134,7 +134,7 @@ export default function Board() {
       // Check if the move is valid
       if (!referee.isValidMove(boardArray.current, prevX, prevY, newX, newY, piece, destPiece)) {
         console.warn(`Invalid move from ${prevX}, ${prevY} to ${newX}, ${newY}`);
-        return prev;
+        return prev; // invalid move, do not update state
       }
 
       // Update the board array
