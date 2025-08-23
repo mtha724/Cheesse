@@ -5,14 +5,6 @@ It follows the official rules of chess and allows:
 - **Single-player mode** against bots of varying difficulty *(planned)*  
 - A **web-hosted user interface** with interactive visuals  
 
-Developed by **Team Cheesse**:  
-- David
-- Macy
-- May
-- Nathan
-- Taewon
-- Yash 
-
 ---
 
 ## What does this project do?  
@@ -88,3 +80,17 @@ npm test
 - Potential online multiplayer (stretch goal)  
 
 ---
+
+## Acknowledgements
+Major Contributers for this project:  
+- David
+- Macy
+- May
+- Nathan
+- Taewon
+- Yash
+
+## Getting Help
+If you need help installing or using the library, please check [React Setup](https://react.dev/learn/setup)
+
+If you've instead found a bug in the library or would like new features added, please refer to our [Contributing Guidelines](CONTRIBUTING.md)
