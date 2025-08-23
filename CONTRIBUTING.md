@@ -36,6 +36,25 @@ Feature requests are reviewed by maintainers, and discussion is encouraged befor
 
 ---
 
+## Submitting Issue Report
+
+For other problems you can submit an issue report.
+
+The default set of issue labels in GitHub is:
+- bug:	Indicates an unexpected problem or unintended behavior
+- documentation:	Indicates a need for improvements or additions to documentation
+- duplicate:	Indicates similar issues, pull requests, or discussions
+- enhancement:	Indicates new feature requests
+- good first issue:	Indicates a good issue for first-time contributors
+- help wanted:	Indicates that a maintainer wants help on an issue or pull request
+- invalid:	Indicates that an issue, pull request, or discussion is no longer relevant
+- question:	Indicates that an issue, pull request, or discussion needs more information
+- wontfix:	Indicates that work won't continue on an issue, pull request, or discussion
+
+
+---
+
+
 ## Branching Workflow
 After forking and cloning the repository
 
