@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDrop } from "react-dnd";
 import Piece, { ItemTypes } from "./Piece";
@@ -100,6 +100,19 @@ export default function Board() {
   // Make a persistent Referee instance
   const referee = useRef(new Referee()).current;
 
+  // Make a persistent board reference
+  const boardArray = useRef<(string | undefined)[][]>(
+    Array(8).fill(null).map(() => Array(8).fill(undefined))
+  );
+
+  // Initialize board once
+  useEffect(() => {
+    for (const [square, piece] of Object.entries(initialPieces)) {
+      const [x, y] = squareToCoords(square);
+      boardArray.current[y][x] = piece;
+    }
+  }, []);
+
   /**
    * Moves a piece from one square to another.
    * 
@@ -119,10 +132,14 @@ export default function Board() {
       const [newX, newY] = squareToCoords(to);
 
       // Check if the move is valid
-      if (!referee.isValidMove(prevX, prevY, newX, newY, piece, destPiece)) {
-        console.warn(`Invalid move from ${from} to ${to}`); // for debugging
+      if (!referee.isValidMove(boardArray.current, prevX, prevY, newX, newY, piece, destPiece)) {
+        console.warn(`Invalid move from ${prevX}, ${prevY} to ${newX}, ${newY}`);
         return prev;
       }
+
+      // Update the board array
+      boardArray.current[prevY][prevX] = undefined; // remove piece from old square
+      boardArray.current[newY][newX] = piece; // place piece on new square
 
       console.log(`Moving ${piece} from ${from} to ${to}`); // for debugging
 

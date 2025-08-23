@@ -13,6 +13,7 @@ export default class Referee {
   * @param destPiece - The piece being captured, if any.
   */
   isValidMove(
+    board: (string | undefined)[][],
     prevX: number,
     prevY: number,
     newX: number,
@@ -30,26 +31,34 @@ export default class Referee {
       return false;
     }
 
+    // Validate the move based on the piece type
     switch (piece) {
       case "pawn_white":
-        return this.validatePawn(prevX, prevY, newX, newY, piece, destPiece, true);
+        return this.validatePawn(prevX, prevY, newX, newY, destPiece, true);
+
       case "pawn_black":
-        return this.validatePawn(prevX, prevY, newX, newY, piece, destPiece, false);
+        return this.validatePawn(prevX, prevY, newX, newY, destPiece, false);
+
       case "rook_white":
       case "rook_black":
         return this.validateRook(dx, dy);
+
       case "bishop_white":
       case "bishop_black":
-        return this.validateBishop(dx, dy);
+        return this.validateBishop(board, prevX, prevY, newX, newY);
+
       case "queen_white":
       case "queen_black":
-        return this.validateQueen(dx, dy);
+        return this.validateQueen(board, prevX, prevY, newX, newY);
+
       case "king_white":
       case "king_black":
         return this.validateKing(dx, dy);
+
       case "knight_white":
       case "knight_black":
         return this.validateKnight(dx, dy);
+
       default:
         return false;
     }
@@ -76,14 +85,12 @@ export default class Referee {
    * @param fy - The starting y-coordinate of the pawn.
    * @param tx - The target x-coordinate for the pawn.
    * @param ty - The target y-coordinate for the pawn.
-   * @param piece - The type of the pawn being moved.
    * @param captured - The piece being captured, if any.
    * @param isWhite - Whether the pawn is white or black.
    * @returns Whether the move is valid.
    */
   private validatePawn(
-    fx: number, fy: number, tx: number, ty: number,
-    piece: string, captured?: string, isWhite = true
+    fx: number, fy: number, tx: number, ty: number, captured?: string, isWhite = true
   ): boolean {
     const dir = isWhite ? 1 : -1;
     const startRow = isWhite ? 1 : 6;
@@ -103,12 +110,44 @@ export default class Referee {
   /**
    * Validates a bishop move.
    *
-   * @param dx - The change in x-coordinate.
-   * @param dy - The change in y-coordinate.
+   * @param board - The current state of the board.
+   * @param fx - The starting x-coordinate of the bishop.
+   * @param fy - The starting y-coordinate of the bishop.
+   * @param tx - The target x-coordinate for the bishop.
+   * @param ty - The target y-coordinate for the bishop.
    * @returns Whether the move is valid.
    */
-  private validateBishop(dx: number, dy: number) {
-    return Math.abs(dx) === Math.abs(dy);
+  private validateBishop(
+    board: (string | undefined)[][],
+    fx: number, fy: number,
+    tx: number, ty: number
+  ) {
+    // Check for valid diagonal movement
+    if (Math.abs(tx - fx) !== Math.abs(ty - fy)) {
+      console.warn(`Invalid bishop move from ${fx}, ${fy} to ${tx}, ${ty}`);
+      return false;
+    }
+
+    // Create step variables for iteration
+    const stepX = tx > fx ? 1 : -1;
+    const stepY = ty > fy ? 1 : -1;
+
+    let x = fx + stepX;
+    let y = fy + stepY;
+
+    // Check along the diagonal
+    while (x !== tx && y !== ty) {
+      if (board[y][x]) {
+        console.warn(`Path blocked by piece at ${x}, ${y}`);
+        return false; // there is a piece blocking the path
+      }
+      // Increment the coordinates
+      x += stepX;
+      y += stepY;
+    }
+
+    // If no pieces are blocking the path, the move is valid
+    return true;
   }
 
   /**
@@ -143,8 +182,8 @@ export default class Referee {
    * @param dy - The change in y-coordinate.
    * @returns Whether the move is valid.
    */
-  private validateQueen(dx: number, dy: number) {
-    return this.validateRook(dx, dy) || this.validateBishop(dx, dy);
+  private validateQueen(board: (string | undefined)[][], dx: number, dy: number, tx: number, ty: number) {
+    return this.validateRook(dx, dy) || this.validateBishop(board, dx, dy, tx, ty);
   }
 
   /**
