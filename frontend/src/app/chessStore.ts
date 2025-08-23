@@ -1,1 +1,0 @@
-// This would store Global state like current Position, legal Moves, turn, result, actions.

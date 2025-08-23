@@ -58,14 +58,13 @@ const initialPieces: Record<SquareId, PieceName> = {
 
 // ---------------- Square Component ---------------- //
 interface SquareProps {
-  id: SquareId;
-  isDark: boolean;
-  piece?: PieceName;
-  movePiece: (from: SquareId, to: SquareId) => void;
-  showLabels?: { rank?: number; file?: string };
+  readonly id: SquareId;
+  readonly isDark: boolean;
+  readonly piece?: PieceName;
+  readonly movePiece: (from: SquareId, to: SquareId) => void;
 }
 
-function Square({ id, isDark, piece, movePiece }: SquareProps) {
+function Square({ id, isDark, piece, movePiece }: Readonly<SquareProps>) {
   const [{ isOver }, drop] = useDrop<{ from: SquareId }, void, { isOver: boolean }>(() => ({
     accept: ItemTypes.PIECE,
     drop: (item) => movePiece(item.from, id),
@@ -94,8 +93,12 @@ export function squareToCoords(square: string): [number, number] {
 }
 
 // ---------------- Board Component ---------------- //
+import { useRecordMove } from '../hooks/useRecordMove';
+
 export default function Board() {
+  const recordMove = useRecordMove();
   const [pieces, setPieces] = useState(initialPieces);
+  const moveInProgress = useRef(false);
 
   // Make a persistent Referee instance
   const referee = useRef(new Referee()).current;
@@ -147,6 +150,17 @@ export default function Board() {
       const next = { ...prev };
       next[to] = piece;
       delete next[from];
+
+      // Only record the move if it hasn't been recorded yet
+      if (!moveInProgress.current) {
+        moveInProgress.current = true;
+        recordMove(from, to, piece);
+        // Reset the flag after a short delay
+        setTimeout(() => {
+          moveInProgress.current = false;
+        }, 0);
+      }
+
       return next;
     });
   }
