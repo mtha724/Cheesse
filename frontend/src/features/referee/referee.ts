@@ -1,4 +1,3 @@
-// TODO implement piece blocking for all pieces (cannot take own pieces)
 // TODO implement jump blocking for rooks, bishops, queens
 
 // This class handles the rules of chess and ensures pieces are moved according to the game's rules.
@@ -25,6 +24,12 @@ export default class Referee {
     const dx = newX - prevX;
     const dy = newY - prevY;
 
+    // Check for blocking pieces
+    if (destPiece && this.isOwnPiece(piece, destPiece)) {
+      console.warn(`Cannot capture own piece: ${destPiece}`);
+      return false;
+    }
+
     switch (piece) {
       case "pawn_white":
         return this.validatePawn(prevX, prevY, newX, newY, piece, destPiece, true);
@@ -48,6 +53,20 @@ export default class Referee {
       default:
         return false;
     }
+  }
+
+  /**
+   * Determines if two pieces belong to the same player.
+   *
+   * @param piece - The piece being moved.
+   * @param destPiece - The piece at the destination.
+   * @returns Whether both pieces belong to the same player.
+   */
+   private isOwnPiece(piece: string, destPiece: string): boolean {
+    // Assumes piece strings are in the format 'type_color'
+    const pieceColor = piece.split('_')[1];
+    const destColor = destPiece.split('_')[1];
+    return pieceColor === destColor;
   }
 
   /**
