@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useRef } from "react";
 import { useDrop } from "react-dnd";
 import Piece, { ItemTypes } from "./Piece";
 import "./board.css";
+import Referee from "../../referee/referee";
 
 // ---------------- Constants ---------------- //
 const FILES = ["a","b","c","d","e","f","g","h"];
 const RANKS = [8,7,6,5,4,3,2,1];
+
 
 type SquareId = `${typeof FILES[number]}${typeof RANKS[number]}`;
 type PieceName =
@@ -83,16 +86,49 @@ function Square({ id, isDark, piece, movePiece }: SquareProps) {
 );
 }
 
+// --------------- Utility Functions ---------------//
+export function squareToCoords(square: string): [number, number] {
+  const file = square.charCodeAt(0) - "a".charCodeAt(0); // 'a' -> 0
+  const rank = parseInt(square[1]) - 1; // '1' -> 0
+  return [file, rank];
+}
+
 // ---------------- Board Component ---------------- //
 export default function Board() {
   const [pieces, setPieces] = useState(initialPieces);
 
+  // Make a persistent Referee instance
+  const referee = useRef(new Referee()).current;
+
+  /**
+   * Moves a piece from one square to another.
+   * 
+   * @param from - The starting square ID.
+   * @param to - The target square ID.
+   */
   function movePiece(from: SquareId, to: SquareId) {
-    if (from === to) return;
     setPieces(prev => {
-      if (!prev[from]) return prev;
+      const piece = prev[from];
+      const destPiece = prev[to];
+
+      if (!piece) return prev; // no piece to move
+      if (from === to) return prev; // no movement
+
+      // Get the coordinates of the squares
+      const [prevX, prevY] = squareToCoords(from);
+      const [newX, newY] = squareToCoords(to);
+
+      // Check if the move is valid
+      if (!referee.isValidMove(prevX, prevY, newX, newY, piece, destPiece)) {
+        console.warn(`Invalid move from ${from} to ${to}`); // for debugging
+        return prev;
+      }
+
+      console.log(`Moving ${piece} from ${from} to ${to}`); // for debugging
+
+      // Update the pieces state
       const next = { ...prev };
-      next[to] = next[from];
+      next[to] = piece;
       delete next[from];
       return next;
     });
@@ -102,12 +138,12 @@ export default function Board() {
     <div className="wrapper">
       <div className="board-wrapper">
         <div className="board">
+          {/* Render the squares */}
           {RANKS.map((rank, rIdx) =>
             FILES.map((file, fIdx) => {
               const squareId = `${file}${rank}` as SquareId;
               const piece = pieces[squareId];
               const isDark = (rIdx + fIdx) % 2 === 1;
-
               return (
                 <Square
                   key={squareId}
