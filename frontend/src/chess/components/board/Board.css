@@ -53,7 +53,7 @@
     top: 4px;
     left: 6px;
     font-size: clamp(10px, 1.8vmin, 12px);
-    font-family: 'Agency FB';
+    font-family: 'Agency FB', sans-serif;
     color: white;
     font-weight: 600;
     pointer-events: none;
@@ -66,7 +66,7 @@
     right: 6px;
     bottom: 4px;
     font-size: clamp(10px, 1.8vmin, 12px);
-    font-family: 'Agency FB';
+    font-family: 'Agency FB', sans-serif;
     color: white;
     font-weight: 600;
     pointer-events: none;

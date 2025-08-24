@@ -49,7 +49,7 @@
 /* Responsive styles */
 @media (min-aspect-ratio: 16/9) {
     h1 {
-        font-family: 'Agency FB';
+        font-family: 'Agency FB', sans-serif;
         font-size: 5vh;
     }
 }
