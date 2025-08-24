@@ -1,1 +1,0 @@
-// This would be Color, PieceType, Piece, Square, Move, Result, FEN

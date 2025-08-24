@@ -3,7 +3,7 @@
 import "./board.css";
 import Square from "./Square";
 import { FILES, RANKS, type SquareId } from "./BoardConfig";
-import { useMovePiece } from "../hooks/useMovePiece";
+import { useMovePiece } from "../board/hooks/useMovePiece";
 
 /**
  * Converts a square ID (e.g., "e4") to board coordinates.

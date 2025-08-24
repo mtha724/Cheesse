@@ -1,6 +1,6 @@
 // ---------------- Imports ---------------- //
 import StartPage from './pages/StartPage'
-import { MoveLogProvider } from './features/history/moveLogStore'
+import { MoveLogProvider } from './chess/components/history/moveLogStore'
 import './App.css'
 
 /**

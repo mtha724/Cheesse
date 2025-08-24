@@ -1,8 +1,8 @@
 // ---------------- Imports ---------------- //
 import { useState, useRef, useEffect } from "react";
-import Referee from "../../referee/referee";
-import { type SquareId, initialPieces } from "../components/BoardConfig";
-import { squareToCoords } from "../components/Board";
+import Referee from "../../../referee/referee";
+import { type SquareId, initialPieces } from "../BoardConfig";
+import { squareToCoords } from "../Board";
 import { useRecordMove } from "./useRecordMove";
 
 export function useMovePiece() {

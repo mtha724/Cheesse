@@ -5,9 +5,9 @@
 
 // ---------------- Imports ---------------- //
 import "./GamePage.css";
-import Board from '../features/board/components/Board';
-import GameMoveLogSidebar from '../features/controls/GameMoveLogSidebar';
-import GameOptionsSidebar from '../features/controls/GameOptionsSidebar';
+import Board from "../chess/components/board/Board";
+import GameMoveLogSidebar from '../chess/components/controls/GameMoveLogSidebar';
+import GameOptionsSidebar from '../chess/components/controls/GameOptionsSidebar';
 
 /**
  * GamePage component - main container for the chess game UI.
