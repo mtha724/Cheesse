@@ -1,3 +1,4 @@
+// ---------------- Imports ---------------- //
 import { createContext, useContext, useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import type { ChessMove, MoveLogState } from './types';
