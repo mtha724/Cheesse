@@ -7,8 +7,7 @@ import Referee from "../../referee/referee";
 
 // ---------------- Constants ---------------- //
 const FILES = ["a","b","c","d","e","f","g","h"];
-const RANKS = [8,7,6,5,4,3,2,1];
-
+const RANKS = [8, 7, 6, 5, 4, 3, 2, 1];
 
 type SquareId = `${typeof FILES[number]}${typeof RANKS[number]}`;
 type PieceName =
@@ -100,6 +99,8 @@ export default function Board() {
   const [pieces, setPieces] = useState(initialPieces);
   const moveInProgress = useRef(false);
 
+  let moveCount = 0;
+
   // Make a persistent Referee instance
   const referee = useRef(new Referee()).current;
 
@@ -135,7 +136,7 @@ export default function Board() {
       const [newX, newY] = squareToCoords(to);
 
       // Check if the move is valid
-      if (!referee.isValidMove(boardArray.current, prevX, prevY, newX, newY, piece, destPiece)) {
+        if (!referee.isValidMove(boardArray.current, prevX, prevY, newX, newY, piece, moveCount,destPiece)) {
         console.warn(`Invalid move from ${prevX}, ${prevY} to ${newX}, ${newY}`);
         return prev; // invalid move, do not update state
       }
@@ -159,8 +160,9 @@ export default function Board() {
         setTimeout(() => {
           moveInProgress.current = false;
         }, 0);
-      }
+        }
 
+        moveCount += 1;   
       return next;
     });
   }

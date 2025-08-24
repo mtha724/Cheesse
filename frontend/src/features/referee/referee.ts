@@ -8,6 +8,7 @@ export default class Referee {
   private prevY = 0;
   private newX = 0;
   private newY = 0;
+  private moveCount = 0;
   private destPiece?: string;
 
   /**
@@ -19,6 +20,8 @@ export default class Referee {
   * @param newY - The target y-coordinate for the piece.
   * @param piece - The type of the piece being moved.
   * @param destPiece - The piece being captured, if any.
+  * @param moveCount - moves taken thus far in the game
+  * 
   */
   isValidMove(
     board: (string | undefined)[][],
@@ -27,6 +30,7 @@ export default class Referee {
     newX: number,
     newY: number,
     piece: string,
+    moveCount: number,
     destPiece?: string
   ): boolean {
 
@@ -37,10 +41,18 @@ export default class Referee {
     this.newX = newX;
     this.newY = newY;
     this.destPiece = destPiece;
+    this.moveCount = moveCount;
 
     // Calculate the difference in position
     const dx = newX - prevX;
     const dy = newY - prevY;
+
+    // checks if selected piece's colour is the one whose turn it is
+    if ((piece.split('_')[1] == "white") && (moveCount % 2 == 1)) {
+      return false;
+    } else if ((piece.split('_')[1] == "black") && (moveCount % 2 == 0)) {
+      return false;
+    }
 
     // Check for blocking pieces
     if (destPiece && this.isOwnPiece(piece, destPiece)) {
