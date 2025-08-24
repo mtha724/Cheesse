@@ -1,3 +1,5 @@
+/* This component represents a chess piece. */
+
 // ---------------- Imports ---------------- //
 import { useDrag } from "react-dnd";
 
@@ -6,10 +8,8 @@ export const ItemTypes = { PIECE: "piece" };
 /**
  * Piece component - represents a chess piece.
  *
- * @param {Object} param0 - The props for the piece.
- * @param {string} param0.id - The unique identifier for the piece.
- * @param {string} param0.src - The source URL for the piece image.
- * @returns {JSX.Element} - The rendered piece component.
+ * @param {string} id - The unique identifier for the piece.
+ * @param {string} src - The source URL for the piece image.
  */
 export default function Piece({ id, src }: { id: string; src: string }) {
   // Set up the drag source for the piece

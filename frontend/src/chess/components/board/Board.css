@@ -1,3 +1,6 @@
+/** This is the stylesheet for the board component */
+
+/* Wrapper for the board */
 .wrapper {
     display: grid;
     place-items: center;
@@ -7,6 +10,7 @@
   
 }
 
+/* Board wrapper styles */
 .board-wrapper {
     display: grid;
     place-items: center;
@@ -17,6 +21,7 @@
     image-rendering: pixelated;
 }
 
+/* Responsive styles */
 @media (min-aspect-ratio: 16/9) {
     .board-wrapper {
         width: 32.5vw;
@@ -32,24 +37,14 @@
 }
 
 
-
+/* Board styles */
 .board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   aspect-ratio: 1 / 1;
   width: 100%;
   border: 2px solid #532;
-  /*background: #222; /* thin separators if gaps appear */
 }
-
-/*.square {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/*.square.light { background: #f0d9b5; }
-.square.dark  { background: #b58863; }
 
 /* Rank label (left edge) */
 .square.first-col::before {
@@ -77,6 +72,7 @@
     pointer-events: none;
 }
 
+/* Square styles */
 .square { position: relative }
 .piece {
     position: absolute;
@@ -89,6 +85,8 @@
     pointer-events: auto;
     filter: drop-shadow(4px -2px 3px rgba(64, 36, 1, 0.5));
 }
+
+/* Highlighted square styles */
 .highlight {
   position: absolute;
   inset: 0;

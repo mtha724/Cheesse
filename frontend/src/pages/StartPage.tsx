@@ -1,8 +1,14 @@
-// src/pages/GamePage.tsx
+/* This is the start page component */
+
+// ---------------- Imports ---------------- //
 import "./StartPage.css"
 import GamePage from './GamePage'
 import { useState } from "react";
 
+/**
+ * StartPage component - Displays the initial game setup options.
+ * @returns {JSX.Element} - The rendered start page component.
+ */
 export default function StartPage() {
     const [gamePage, setGamePage] = useState(false)
     const [buttonsVisible, setButtonsVisible] = useState(true)
@@ -11,6 +17,7 @@ export default function StartPage() {
         setButtonsVisible(false)
     }
 
+    // Render the start page or the game page based on state
     return (
         <div className="start-page-wrapper">
             {buttonsVisible && (

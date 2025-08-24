@@ -1,3 +1,6 @@
+/** This is the stylesheet for the move list component */
+
+/* Container for the move list */
 .move-list {
     display: flex;
     flex-direction: column;
@@ -19,6 +22,7 @@
     display: none;
 }
 
+/* Move entry in the list */
 .move-entry {
     display: grid;
     grid-template-columns: 10% 40% 40%;
@@ -30,10 +34,12 @@
     min-width: 0; /* Allows content to shrink below minimum content size */
 }
 
+/* Move entry hover effect */
 .move-entry:hover {
     background-color: rgba(93, 57, 6, 0.1);
 }
 
+/* Move number styling */
 .move-number {
     font-weight: bold;
     color: #5d3906;
@@ -41,6 +47,7 @@
     font-size: 3vh;
 }
 
+/* Move text styling */
 .move-text {
     font-size: 2.5vh;
     text-align: center;
@@ -51,6 +58,7 @@
     min-width: 0; /* Allows content to shrink below minimum content size */
 }
 
+/* Move text styling for white pieces */
 .move-text.white {
     color: #5d3906;
     padding: 1vh;
@@ -59,6 +67,7 @@
     border: 1px solid rgba(93, 57, 6, 0.2);
 }
 
+/* Move text styling for black pieces */
 .move-text.black {
     color: #5d3906;
     padding: 1vh;

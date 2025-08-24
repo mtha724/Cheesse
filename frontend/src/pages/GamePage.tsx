@@ -1,7 +1,4 @@
-/**
- * Main game page layout. Renders the board and sidebars.
- * @module GamePage
- */
+/* This is the game page component */
 
 // ---------------- Imports ---------------- //
 import "./GamePage.css";

@@ -1,5 +1,11 @@
+/* This is the game options sidebar component */
+// ---------------- Imports ---------------- //
 import './GameOptionsSidebar.css'
 
+/**
+ * GameOptionsSidebar component - Displays the game options sidebar.
+ * @returns {JSX.Element} - The rendered component.
+ */
 export default function GameMoveLogSidebar() {
     return (
      <div className="game-options-wrapper">

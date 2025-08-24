@@ -1,3 +1,6 @@
+/* This is the main entry point for the application */
+
+// ---------------- Imports ---------------- //
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { DndProvider } from 'react-dnd'

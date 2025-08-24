@@ -1,3 +1,5 @@
+/* This utility file provides helper methods for chess-related calculations. */
+
 /**
  * Converts a square ID (e.g., "e4") to board coordinates.
  * 

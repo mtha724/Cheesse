@@ -1,6 +1,4 @@
-/**
- * This holds all the board configuration constants.
- */
+/* This file contains configuration constants for the chessboard. */
 
 // ---------------- Board Config ---------------- //
 export const FILES = ["a","b","c","d","e","f","g","h"] as const;

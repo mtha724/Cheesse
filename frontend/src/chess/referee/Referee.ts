@@ -1,8 +1,7 @@
-// TODO implement jump blocking for rooks, bishops, queens
+/* This class handles the rules of chess and ensures pieces are moved according to the game's rules. */
+export default class Referee {
 
-// This class handles the rules of chess and ensures pieces are moved according to the game's rules.
-export default class Referee {  
-  
+  // Define the board state
   private board: (string | undefined)[][] = [];
   private prevX = 0;
   private prevY = 0;
@@ -12,9 +11,10 @@ export default class Referee {
   private destPiece?: string;
 
 
-    setMoveCount(moveCount: number) {
-        this.moveCount = moveCount;
-    }
+  setMoveCount(moveCount: number) {
+      this.moveCount = moveCount;
+  }
+
   /**
   * Validates a move for a given piece.
   *

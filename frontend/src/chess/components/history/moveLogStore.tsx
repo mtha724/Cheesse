@@ -1,3 +1,5 @@
+/* This file contains the context and hooks for managing the move log in the chess game. */
+
 // ---------------- Imports ---------------- //
 import { createContext, useContext, useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
@@ -5,6 +7,11 @@ import type { ChessMove, MoveLogState } from './types';
 
 const MoveLogContext = createContext<MoveLogState | null>(null);
 
+/**
+ * MoveLogProvider - Context provider for the move log.
+ * @param {ReactNode} children - The child components for the provider.
+ * @returns {JSX.Element} - The provider component.
+ */
 export function MoveLogProvider({ children }: { children: ReactNode }) {
     const [moves, setMoves] = useState<ChessMove[]>([]);
 
@@ -23,11 +30,13 @@ export function MoveLogProvider({ children }: { children: ReactNode }) {
         });
     };
 
+    // Memoized context value
     const value = useMemo(() => ({
         moves,
         addMove
     }), [moves]);
 
+    // Provide the context value
     return (
         <MoveLogContext.Provider value={value}>
             {children}
@@ -35,6 +44,10 @@ export function MoveLogProvider({ children }: { children: ReactNode }) {
     );
 }
 
+/**
+ * Custom hook to access the move log context.
+ * @returns {MoveLogState} - The current move log state.
+ */
 export function useMoveLog(): MoveLogState {
     const context = useContext(MoveLogContext);
     if (!context) {

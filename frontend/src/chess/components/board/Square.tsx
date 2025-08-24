@@ -1,3 +1,5 @@
+/* This component represents a square on the chessboard. */
+
 // ---------------- Imports ---------------- //
 import { useDrop } from "react-dnd";
 import Piece, { ItemTypes } from "./Piece";

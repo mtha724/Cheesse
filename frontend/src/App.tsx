@@ -1,3 +1,4 @@
+/* This is the main application component */
 // ---------------- Imports ---------------- //
 import StartPage from './pages/StartPage'
 import { MoveLogProvider } from './chess/components/history/moveLogStore'

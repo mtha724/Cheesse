@@ -1,3 +1,6 @@
+/* This is the stylesheet for the game log sidebar */
+
+/* Wrapper for the game log */
 .game-log-wrapper {
     justify-content: center;
     display: flex;
@@ -7,6 +10,7 @@
     width: 50vh;
 }
 
+/* Sidebar for the move log */
 .game-move-log-sidebar {
     background-image: url("../../assets/menuBoard.png");
     background-repeat: no-repeat;
@@ -20,6 +24,7 @@
     filter: drop-shadow(-5px 5px 10px rgb(64, 36, 1));
 }
 
+/* Wrapper for the move log */
 .move-log-wrapper {
     display: flex;
     flex-direction: column;
@@ -35,11 +40,13 @@
     overflow: hidden; /* Ensures no content spills out */
 }
 
+/* Label for the move log */
 .move-log-lbl {
 
     padding-top: 5%;
 }
 
+/* Responsive styles */
 @media (min-aspect-ratio: 16/9) {
     h1 {
         font-family: 'Agency FB';
@@ -47,6 +54,7 @@
     }
 }
 
+/* Styles for smaller screens */
 @media (max-aspect-ratio: 16/9) {
     .game-log-wrapper {
         height: 50vw;

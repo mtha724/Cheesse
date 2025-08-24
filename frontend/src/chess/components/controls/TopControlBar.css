@@ -1,3 +1,6 @@
+/** This is the stylesheet for the top control bar */
+
+/* Wrapper for the top control bar */
 .top-control-bar {
   justify-content: center;
   display: flex;

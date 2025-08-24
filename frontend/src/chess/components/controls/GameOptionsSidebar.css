@@ -1,3 +1,6 @@
+/* This is the stylesheet for the game options sidebar */
+
+/* Wrapper for the game options */
 .game-options-wrapper {
     justify-content: center;
     display: flex;
@@ -7,6 +10,7 @@
     width: 50vh;
 }
 
+/* Sidebar for the game options */
 .game-options-sidebar {
     background-image: url("../../assets/menuBoard.png");
     background-repeat: no-repeat;
@@ -20,6 +24,7 @@
     filter: drop-shadow(5px 5px 10px rgb(64, 36, 1));
 }
 
+/* Column for the buttons */
 .button-col {
     justify-content: center;
     display: flex;
@@ -31,6 +36,7 @@
     padding-bottom: 20%;
 }
 
+/* Button styles */
 button {
     width: 60%;
     height: fit-content;
@@ -44,6 +50,7 @@ button {
 
 }
 
+/* Heading styles */
 h1 {
     font-family: 'Agency FB';
     font-size: 3vw;
@@ -53,6 +60,7 @@ h1 {
     padding-top: 10%;
 }
 
+/* Responsive styles */
 @media (min-aspect-ratio: 16/9) {
     button {
   

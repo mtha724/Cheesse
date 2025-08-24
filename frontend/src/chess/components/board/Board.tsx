@@ -1,3 +1,4 @@
+/* This component renders the chessboard and its squares. */
 
 // ---------------- Imports ---------------- //
 import "./board.css";
@@ -14,6 +15,7 @@ import { useMovePiece } from "../board/hooks/useMovePiece";
 export default function Board() {
   const { pieces, movePiece } = useMovePiece();
 
+  // Render the board
   return (
     <div className="wrapper">
       <div className="board-wrapper">

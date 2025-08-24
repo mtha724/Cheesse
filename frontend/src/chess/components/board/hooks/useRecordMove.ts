@@ -1,9 +1,15 @@
+/* This hook manages the recording of chess moves. */
+
 // ---------------- Imports ---------------- //
 import { useMoveLog } from '../../history/moveLogStore';
 
+/**
+ * Custom hook to record a chess move.
+ * @returns {function} - A function to record a move.
+ */
 export function useRecordMove() {
     const { addMove } = useMoveLog();
-    
+    // Record a move in the history
     return (from: string, to: string, piece: string) => {
         const [pieceName, color] = piece.split('_');
         // Use standard chess notation:

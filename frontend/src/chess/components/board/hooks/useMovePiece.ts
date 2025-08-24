@@ -1,3 +1,5 @@
+/* This hook manages the movement of chess pieces on the board. */
+
 // ---------------- Imports ---------------- //
 import { useState, useRef, useEffect } from "react";
 import Referee from "../../../referee/referee";
@@ -5,6 +7,10 @@ import { type SquareId, initialPieces } from "../BoardConfig";
 import { squareToCoords } from "../../../utils/chessUtils";
 import { useRecordMove } from "./useRecordMove";
 
+/**
+ * Custom hook to manage piece movement in the chess game.
+ * @returns {object} - An object containing the current pieces and a function to move a piece.
+ */
 export function useMovePiece() {
   const recordMove = useRecordMove();
   const [pieces, setPieces] = useState(initialPieces);
