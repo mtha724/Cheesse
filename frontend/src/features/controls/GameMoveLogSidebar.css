@@ -24,8 +24,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 75%;
-    width: 90%;
+    height: 70%;
+    width: 80%;
     background-color: #e2c489;
     border-radius: 8px;
     border: 2px solid #5d3906;
@@ -51,6 +51,10 @@
     .game-log-wrapper {
         height: 50vw;
         width: 25vw;
+    }
+
+    .move-log-wrapper {
+        height: 65%;
     }
 
 }

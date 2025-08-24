@@ -1,0 +1,54 @@
+
+
+.start-page-div {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    gap: 0px;
+    background-color: rgba(92, 48, 4, 0.6);
+    margin: 0;
+}
+
+.cheesse {
+    font-size: 27vh;
+    padding: 0px;
+    line-height: 1em;
+    line-padding: 0px;
+    margin-bottom: 0;
+}
+
+.buttons-div {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+
+.play-style-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.timer-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.option-button {
+    width: 10vw;
+    height: 12vh;
+    padding: 0px;
+}
+
+.start-button {
+    width: 15vw;
+    height: 12vh;
+    padding: 0px;
+}
