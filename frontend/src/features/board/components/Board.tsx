@@ -136,7 +136,8 @@ export default function Board() {
       const [newX, newY] = squareToCoords(to);
 
       // Check if the move is valid
-        if (!referee.isValidMove(boardArray.current, prevX, prevY, newX, newY, piece, moveCount,destPiece)) {
+      referee.setMoveCount(moveCount);
+      if (!referee.isValidMove(boardArray.current, prevX, prevY, newX, newY, piece, destPiece)) {
         console.warn(`Invalid move from ${prevX}, ${prevY} to ${newX}, ${newY}`);
         return prev; // invalid move, do not update state
       }

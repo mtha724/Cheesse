@@ -11,6 +11,10 @@ export default class Referee {
   private moveCount = 0;
   private destPiece?: string;
 
+
+    setMoveCount(moveCount: number) {
+        this.moveCount = moveCount;
+    }
   /**
   * Validates a move for a given piece.
   *
@@ -20,7 +24,6 @@ export default class Referee {
   * @param newY - The target y-coordinate for the piece.
   * @param piece - The type of the piece being moved.
   * @param destPiece - The piece being captured, if any.
-  * @param moveCount - moves taken thus far in the game
   * 
   */
   isValidMove(
@@ -30,7 +33,6 @@ export default class Referee {
     newX: number,
     newY: number,
     piece: string,
-    moveCount: number,
     destPiece?: string
   ): boolean {
 
@@ -41,14 +43,13 @@ export default class Referee {
     this.newX = newX;
     this.newY = newY;
     this.destPiece = destPiece;
-    this.moveCount = moveCount;
 
     // Calculate the difference in position
     const dx = newX - prevX;
     const dy = newY - prevY;
 
     // checks if selected piece's colour is the one whose turn it is
-    if (((piece.split('_')[1] == "white") && (moveCount % 2 == 1)) || ((piece.split('_')[1] == "black") && (moveCount % 2 == 0))) {
+    if (((piece.split('_')[1] == "white") && (this.moveCount % 2 == 1)) || ((piece.split('_')[1] == "black") && (this.moveCount % 2 == 0))) {
       return false;
     }
 
