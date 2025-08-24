@@ -1,8 +1,8 @@
 .move-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
-    padding: 8px 6px;
     overflow-y: auto;
     max-height: 100%;
     width: 100%;
@@ -21,10 +21,10 @@
 
 .move-entry {
     display: grid;
-    grid-template-columns: 25px 42% 42%;
+    grid-template-columns: 10% 40% 40%;
     gap: 4px;
     align-items: center;
-    padding: 1px 2px;
+    justify-content: center;
     border-radius: 4px;
     width: 100%;
     min-width: 0; /* Allows content to shrink below minimum content size */
@@ -37,13 +37,12 @@
 .move-number {
     font-weight: bold;
     color: #5d3906;
-    text-align: right;
-    font-size: 0.9em;
+    text-align: center;
+    font-size: 3vh;
 }
 
 .move-text {
-    font-size: 0.95em;
-    padding: 3px 4px;
+    font-size: 2.5vh;
     text-align: center;
     font-weight: bold;
     white-space: nowrap;
@@ -54,6 +53,7 @@
 
 .move-text.white {
     color: #5d3906;
+    padding: 1vh;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 4px;
     border: 1px solid rgba(93, 57, 6, 0.2);
@@ -61,6 +61,7 @@
 
 .move-text.black {
     color: #5d3906;
+    padding: 1vh;
     background-color: rgba(93, 57, 6, 0.1);
     border-radius: 4px;
     border: 1px solid rgba(93, 57, 6, 0.2);
