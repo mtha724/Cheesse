@@ -48,9 +48,7 @@ export default class Referee {
     const dy = newY - prevY;
 
     // checks if selected piece's colour is the one whose turn it is
-    if ((piece.split('_')[1] == "white") && (moveCount % 2 == 1)) {
-      return false;
-    } else if ((piece.split('_')[1] == "black") && (moveCount % 2 == 0)) {
+    if (((piece.split('_')[1] == "white") && (moveCount % 2 == 1)) || ((piece.split('_')[1] == "black") && (moveCount % 2 == 0))) {
       return false;
     }
 
